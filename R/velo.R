@@ -1,3 +1,16 @@
+utils::globalVariables(
+  c(
+    "Total",
+    "numero_boucle",
+    "probabilite_anomalie",
+    "jour_semaine",
+    "boucle",
+    "date",
+    "total_trajets",
+    "moyenne"
+  )
+)
+
 #' Filtrer les anomalies des trajets vélos
 #'
 #' Filtre les observations dont la probabilité de présence d'anomalies est
@@ -10,7 +23,7 @@
 #' @export
 filtre_anomalie <- function(df_velo) {
   df_velo |>
-    dplyr::filter(!`Probabilité de présence d'anomalies` %in% c("Forte", "Faible")) |>
+    dplyr::filter(!probabilite_anomalie %in% c("Forte", "Faible")) |>
     dplyr::filter(Total > 0, Total < 10000)
 }
 
@@ -31,7 +44,7 @@ compter_nombre_trajets <- function(df_velo) {
 #' Compter le nombre de boucles
 #'
 #' Compte le nombre de boucles distinctes à partir de la colonne
-#' `Numéro de boucle`.
+#' `numero_boucle`.
 #'
 #' @param df_velo Un data.frame de trajets vélos.
 #'
@@ -39,7 +52,7 @@ compter_nombre_trajets <- function(df_velo) {
 #' @export
 compter_nombre_boucle <- function(df_velo) {
   df_velo |>
-    dplyr::pull(`Numéro de boucle`) |>
+    dplyr::pull(numero_boucle) |>
     unique() |>
     length()
 }
@@ -61,23 +74,23 @@ trouver_trajet_max <- function(df_velo) {
   ligne_max <- df_sans_anomalie |>
     dplyr::slice_max(Total, n = 1)
 
-  boucle_max <- ligne_max$`Boucle de comptage`[1]
-  date_max <- ligne_max$`Date formatée`[1]
+  boucle_max <- ligne_max$boucle[1]
+  date_max <- ligne_max$date[1]
   total_max <- ligne_max$Total[1]
 
   moyenne_par_jour_boucle <- df_sans_anomalie |>
-    dplyr::filter(`Boucle de comptage` == boucle_max) |>
+    dplyr::filter(boucle == boucle_max) |>
     dplyr::summarise(moyenne = mean(Total, na.rm = TRUE)) |>
     dplyr::pull(moyenne)
 
   moyenne_par_boucle_date <- df_sans_anomalie |>
-    dplyr::filter(`Date formatée` == date_max) |>
+    dplyr::filter(date == date_max) |>
     dplyr::summarise(moyenne = mean(Total, na.rm = TRUE)) |>
     dplyr::pull(moyenne)
 
   data.frame(
-    `Boucle de comptage` = boucle_max,
-    `Date formatée` = date_max,
+    boucle = boucle_max,
+    date = date_max,
     Total = total_max,
     moyenne_par_jour_boucle = moyenne_par_jour_boucle,
     moyenne_par_boucle_date = moyenne_par_boucle_date
@@ -94,7 +107,7 @@ trouver_trajet_max <- function(df_velo) {
 #' @export
 calcul_distribution_semaine <- function(df_velo) {
   df_velo |>
-    dplyr::group_by(`Jour de la semaine`) |>
+    dplyr::group_by(jour_semaine) |>
     dplyr::summarise(total_trajets = sum(Total, na.rm = TRUE), .groups = "drop")
 }
 
@@ -112,7 +125,7 @@ plot_distribution_semaine <- function(df_velo) {
     calcul_distribution_semaine() |>
     ggplot2::ggplot(
       ggplot2::aes(
-        x = factor(`Jour de la semaine`),
+        x = factor(jour_semaine),
         y = total_trajets
       )
     ) +
