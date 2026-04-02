@@ -1,11 +1,10 @@
 Package: firstlib.pires
-Title: What the Package Does (One Line, Title Case)
+Title: TD5 - Outils d'analyse des données de trajets vélos à Nantes
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Amélie", "Pires", , "amelie.pires18@gmail.com", role = c("aut", "cre"))
+Description: Ce package fournit des fonctions permettant d'analyser les données de trajets vélos à Nantes, notamment le filtrage des anomalies, le calcul de statistiques et la visualisation des flux.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
