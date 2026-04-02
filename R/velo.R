@@ -137,3 +137,18 @@ plot_distribution_semaine <- function(df_velo) {
     ) +
     ggplot2::theme_bw()
 }
+
+#' Filtrer les trajets par numéro de boucle
+#'
+#' Sélectionne uniquement les lignes correspondant aux numéros de boucle
+#' fournis en entrée.
+#'
+#' @param trajet Un data.frame de trajets vélos.
+#' @param numero Un vecteur de numéros de boucle.
+#'
+#' @return Un data.frame filtré.
+#' @export
+filtrer_trajet <- function(trajet, numero) {
+  trajet |>
+    dplyr::filter(numero_boucle %in% numero)
+}
