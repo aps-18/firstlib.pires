@@ -124,13 +124,3 @@ plot_distribution_semaine <- function(df_velo) {
     ) +
     ggplot2::theme_bw()
 }
-
-
-
-
-# Q7 ----
-
-devtools::document()
-#créer le dossier man/
-#générer les fichiers .Rd
-#mettre à jour NAMESPACE

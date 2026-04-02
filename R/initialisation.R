@@ -19,7 +19,7 @@ usethis::use_git()
 
 #créer nouveau répertoire sur github
 
-usethis::use_git_remote("origin", "https://github.com/aps-18/firstlib.pires.git")
+#usethis::use_git_remote("origin", "https://github.com/aps-18/firstlib.pires.git")
 #usethis::git_remotes() #vérif
 
 
@@ -48,5 +48,11 @@ usethis::use_package("ggplot2", type = "Imports")
 #change les imports dans le fichier DESCRIPTION
 
 
+# Q7 ----
+
+devtools::document()
+#créer le dossier man/
+#générer les fichiers .Rd
+#mettre à jour NAMESPACE
 
 
