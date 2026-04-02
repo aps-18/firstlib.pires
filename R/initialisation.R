@@ -36,8 +36,20 @@ usethis::git_remotes() #vérif
 usethis::use_mit_license()
 #pour choisir une license et modifier le fichier description à ce niveau direct
 
+# Q6 ----
+
+usethis::use_r("velo")
+
+#remplir avec les fonctions et leur documentation
+
+usethis::use_package("dplyr", type = "Imports")
+usethis::use_package("ggplot2", type = "Imports")
+#Renseigner les dépendances avec Roxygen2 car j’utilise des fonctions de dplyr et ggplot2
+#change les imports dans le fichier DESCRIPTION
 
 
+# Q7 ----
 
+devtools::document()
 
 
