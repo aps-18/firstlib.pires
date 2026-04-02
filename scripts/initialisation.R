@@ -99,3 +99,68 @@ usethis::use_package("ggplot2", type = "Imports")
 
 #refaire devtools::check() pour vérifier
 
+
+# Q9 ----
+
+#import
+library(readr)
+df_velo <- read_delim("244400404_comptages-velo-nantes-metropole.csv", delim = ";")
+
+#filtrer les vacances de Toussaint 2025
+library(dplyr)
+df_velo <- df_velo |>
+  filter(`Date formatée` >= "2025-10-18",
+         `Date formatée` <= "2025-11-03")
+
+#on renomme dcp nos colonnes
+df_velo <- df_velo |>
+dplyr::rename(
+  numero_boucle = `Numéro de boucle`,
+  date = `Date formatée`,
+  probabilite_anomalie = `Probabilité de présence d'anomalies`,
+  jour_semaine = `Jour de la semaine`,
+  boucle = `Boucle de comptage`
+)
+
+#ajouter les données dans le package
+usethis::use_data(df_velo, overwrite = TRUE)
+
+#vérif
+devtools::load_all()
+df_velo
+
+
+# Q10 ----
+
+#créer un fichier de documentation
+usethis::use_r("data-df_velo")
+
+#la compléter, la remplir
+
+#vérif
+devtools::document()
+devtools::load_all()
+?df_velo
+
+
+# Q11 ----
+
+#git checkout -b brancheQ11  dans le terminal
+#pour créer une nouvelle branche
+
+#git branch
+#pour vérifier
+
+
+#ajouter la fonction filtrer_trajet dans velo.R
+
+
+#vérif
+devtools::document()
+devtools::load_all()
+?filtrer_trajet
+
+#test
+filtrer_trajet(trajet = df_velo, numero = c(880, 881))
+
+
