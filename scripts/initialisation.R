@@ -164,3 +164,7 @@ devtools::load_all()
 filtrer_trajet(trajet = df_velo, numero = c(880, 881))
 
 #faire commit/push (via la brancheQ11)
+
+#Sur GitHub (dans repo, Compare & pull request, Create pull request, Merge pull request)
+#Sur RStudio (onglet Git, master, Pull)
+
