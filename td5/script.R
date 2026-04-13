@@ -1,4 +1,4 @@
-#Création du dossier td5 pour pouvoir mettre notre code et le lancer
+#Création du dossier td5 pour pouvoir mettre notre code et le lancer (sans code)
 #ne pas avoir de code dans le dossier R, seulement des fonctions et définitions
 
 # Q1 ----
@@ -291,6 +291,18 @@ devtools::check()
 #à la racine du package, il y a des fichiers/dossiers que R ne veut pas pour un package
 #1 dossier td5 créé par moi-même pour pouvoir rédiger/répaudre au td
 #1 fichier 244400404_comptages-velo-nantes-metropole.csv
+
+#mettre le fichier dans le dossier
+file.rename(
+  "244400404_comptages-velo-nantes-metropole.csv",
+  "td5/244400404_comptages-velo-nantes-metropole.csv"
+)
+
+#puis on ignore
+usethis::use_build_ignore("td5") #dossier ajouter au fichier .Rbuildignore
+
+#on revérifie
+devtools::check()
 
 
 # Q23 ----
