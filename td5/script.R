@@ -313,4 +313,7 @@ covr::report() #toujours 100%
 
 
 
-
+#TD6 (ajout d'une nouvelle fonction)
+#mettre la nouvelle focntion dans velo.R
+devtools::document()
+devtools::install()
