@@ -263,5 +263,21 @@ devtools::test() #lancer les tests
 # Q21 ----
 
 #faire un commit
+#git push -u origin feat  push dans le terminal
+#faire “Compare & pull request” puis Merge sur Github
+#revenir sur branche master
+#faire pull
 
+#restart R
+devtools::install() #installe la nouvelle version du package
+library(firstlib.pires)
 
+#tests des nouveaux paramètres
+calcul_distribution_semaine(df_velo, filtre = TRUE)
+calcul_distribution_semaine(df_velo, filtre = FALSE)
+
+#on vérifie si ça a changé quelque chose
+res_filtre <- calcul_distribution_semaine(df_velo, filtre = TRUE)
+res_sans_filtre <- calcul_distribution_semaine(df_velo, filtre = FALSE)
+res_filtre
+res_sans_filtre
