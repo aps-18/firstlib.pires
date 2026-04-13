@@ -1,4 +1,4 @@
-#Création du dossier scripts pour pouvoir mettre notre code et le lancer
+#Création du dossier td5 pour pouvoir mettre notre code et le lancer
 #ne pas avoir de code dans le dossier R, seulement des fonctions et définitions
 
 # Q1 ----
@@ -93,7 +93,7 @@ usethis::use_package("ggplot2", type = "Imports")
 #)
 
 
-#1 note à cause d'un fichier git (inutil donc on a supprimé) et du dossier scripts qu'on garde
+#1 note à cause d'un fichier git (inutil donc on a supprimé) et du dossier td5 qu'on garde
 #1 autre note à cause de la colonne Total où il ne comprend pas que c'est une colonne
 #on va utiliser utils::globalVariables au début de velo.R pour spécifier le nom de nos colonnes
 
@@ -281,3 +281,24 @@ res_filtre <- calcul_distribution_semaine(df_velo, filtre = TRUE)
 res_sans_filtre <- calcul_distribution_semaine(df_velo, filtre = FALSE)
 res_filtre
 res_sans_filtre
+
+
+# Q22 ----
+
+devtools::check()
+
+#renvoie 1 note
+#à la racine du package, il y a des fichiers/dossiers que R ne veut pas pour un package
+#1 dossier td5 créé par moi-même pour pouvoir rédiger/répaudre au td
+#1 fichier 244400404_comptages-velo-nantes-metropole.csv
+
+
+# Q23 ----
+
+#couverture de test
+covr::package_coverage()
+covr::report() #toujours 100%
+
+
+
+
