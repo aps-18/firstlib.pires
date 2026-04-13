@@ -87,7 +87,7 @@ test_that("calcul_distribution_semaine calcule correctement le total par jour", 
     stringsAsFactors = FALSE
   )
 
-  res <- calcul_distribution_semaine(df_test)
+  res <- calcul_distribution_semaine(df_test, filtre = FALSE)
 
   expect_s3_class(res, "data.frame")
   expect_true(all(c("jour_semaine", "total_trajets") %in% names(res)))
@@ -150,4 +150,45 @@ test_that("filtrer_trajet renvoie le jeu non filtré si numero est NULL", {
 
   expect_s3_class(res, "data.frame")
   expect_equal(res, df_test)
+})
+
+test_that("calcul_distribution_semaine avec filtre = TRUE filtre les anomalies", {
+  df_test <- data.frame(
+    probabilite_anomalie = c("Aucune", "Forte", "Aucune"),
+    Total = c(10, 10000, 20),
+    jour_semaine = c("lundi", "lundi", "mardi"),
+    stringsAsFactors = FALSE
+  )
+
+  res <- calcul_distribution_semaine(df_test, filtre = TRUE)
+
+  expect_s3_class(res, "data.frame")
+  expect_equal(res$total_trajets[res$jour_semaine == "lundi"], 10)
+})
+
+test_that("calcul_distribution_semaine avec filtre = FALSE garde toutes les données", {
+  df_test <- data.frame(
+    probabilite_anomalie = c("Aucune", "Forte"),
+    Total = c(10, 100),
+    jour_semaine = c("lundi", "lundi"),
+    stringsAsFactors = FALSE
+  )
+
+  res <- calcul_distribution_semaine(df_test, filtre = FALSE)
+
+  expect_equal(res$total_trajets[res$jour_semaine == "lundi"], 110)
+})
+
+test_that("calcul_distribution_semaine filtre modifie le résultat", {
+  df_test <- data.frame(
+    probabilite_anomalie = c("Aucune", "Forte"),
+    Total = c(10, 100),
+    jour_semaine = c("lundi", "lundi"),
+    stringsAsFactors = FALSE
+  )
+
+  res_filtre <- calcul_distribution_semaine(df_test, filtre = TRUE)
+  res_sans_filtre <- calcul_distribution_semaine(df_test, filtre = FALSE)
+
+  expect_true(res_filtre$total_trajets != res_sans_filtre$total_trajets)
 })

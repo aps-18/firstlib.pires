@@ -102,10 +102,16 @@ trouver_trajet_max <- function(df_velo) {
 #' Additionne le nombre de trajets par jour de la semaine.
 #'
 #' @param df_velo Un data.frame de trajets vélos.
+#' @param filtre Un booléen. Si `TRUE`, les anomalies sont filtrées avant le
+#' calcul. Si `FALSE`, le calcul est effectué sur les données brutes.
 #'
 #' @return Un tibble contenant le total des trajets par jour de la semaine.
 #' @export
-calcul_distribution_semaine <- function(df_velo) {
+calcul_distribution_semaine <- function(df_velo, filtre = TRUE) {
+  if (filtre) {
+    df_velo <- filtre_anomalie(df_velo)
+  }
+
   df_velo |>
     dplyr::group_by(jour_semaine) |>
     dplyr::summarise(total_trajets = sum(Total, na.rm = TRUE), .groups = "drop")

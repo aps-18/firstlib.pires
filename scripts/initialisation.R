@@ -174,7 +174,7 @@ filtrer_trajet(trajet = df_velo, numero = c(880, 881))
 
 usethis::use_testthat()
 
-usethis::use_test("test-velo.R")
+usethis::use_test("velo")
 #Ça va créer un fichier dans : tests/testthat/test-velo.R
 
 
@@ -224,6 +224,44 @@ pkgdown::build_site() #construire le site
 
 #faire un commit/push
 
+# Q18 ----
 
+#restart session R
+
+remotes::install_github("aps-18/firstlib.pires")
+#Installer le package depuis répertoire GitHub
+
+library(firstlib.pires)
+
+plot_distribution_semaine(df_velo) #vérif
+
+
+# Q19 ----
+
+#git checkout -b feat  dans la console pour faire une nouvelle branche et aller dessus
+#git branch  pour vérifier
+
+#modifier la fonction calcul_distribution_semaine() dans R/velo.R
+
+devtools::document() #pour mettre à jour
+
+#exemples pour tester si ça marche
+calcul_distribution_semaine(df_velo)
+calcul_distribution_semaine(df_velo, filtre = TRUE)
+calcul_distribution_semaine(df_velo, filtre = FALSE)
+
+
+# Q20 ----
+
+#documentation mise à jour dans R/velo.R (avec @param...)
+
+#rajouter des tests dans tests/testthat/test-velo.R
+
+devtools::test() #lancer les tests
+
+
+# Q21 ----
+
+#faire un commit
 
 
