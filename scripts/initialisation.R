@@ -220,4 +220,10 @@ pkgdown::build_site() #construire le site
 #dans articles, il y a nos vignettes
 
 
+# Q17 ----
+
+#faire un commit/push
+
+
+
 
