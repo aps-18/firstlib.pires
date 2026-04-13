@@ -178,12 +178,14 @@ get_data <- function(boucle, mois) {
     "&rows=10000"
   )
 
-  data <- jsonlite::fromJSON(url)$records$fields
-  df <- as.data.frame(data)
+  data <- jsonlite::fromJSON(url)
+
+  df <- dplyr::bind_rows(data$records$fields)
 
   df$date <- as.Date(df$date)
-  df <- df[df$numero_boucle == boucle, ]
-  df <- df[format(df$date, "%m") == sprintf("%02d", mois), ]
+
+  df <- df[df$boucle_num == boucle, , drop = FALSE]
+  df <- df[format(df$date, "%m") == sprintf("%02d", mois), , drop = FALSE]
 
   df
 }
