@@ -141,14 +141,19 @@ plot_distribution_semaine <- function(df_velo) {
 #' Filtrer les trajets par numéro de boucle
 #'
 #' Sélectionne uniquement les lignes correspondant aux numéros de boucle
-#' fournis en entrée.
+#' fournis en entrée. Si `numero` vaut `NULL`, le jeu de données est renvoyé
+#' sans filtrage.
 #'
 #' @param trajet Un data.frame de trajets vélos.
-#' @param numero Un vecteur de numéros de boucle.
+#' @param numero Un vecteur de numéros de boucle, ou `NULL`.
 #'
 #' @return Un data.frame filtré.
 #' @export
 filtrer_trajet <- function(trajet, numero) {
+  if (is.null(numero)) {
+    return(trajet)
+  }
+
   trajet |>
     dplyr::filter(numero_boucle %in% numero)
 }

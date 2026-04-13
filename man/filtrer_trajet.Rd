@@ -9,12 +9,13 @@ filtrer_trajet(trajet, numero)
 \arguments{
 \item{trajet}{Un data.frame de trajets vélos.}
 
-\item{numero}{Un vecteur de numéros de boucle.}
+\item{numero}{Un vecteur de numéros de boucle, ou \code{NULL}.}
 }
 \value{
 Un data.frame filtré.
 }
 \description{
 Sélectionne uniquement les lignes correspondant aux numéros de boucle
-fournis en entrée.
+fournis en entrée. Si \code{numero} vaut \code{NULL}, le jeu de données est renvoyé
+sans filtrage.
 }
