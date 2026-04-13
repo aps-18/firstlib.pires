@@ -67,8 +67,9 @@ usethis::use_package("ggplot2", type = "Imports")
 
 #?compter_nombre_trajets
 #pour vérifier la doc
-#on doit voir Tu dois voir :
+#on doit voir :
 #-Description
+#-Usage
 #-Arguments (@param)
 #-Value (@return)
 
@@ -167,4 +168,45 @@ filtrer_trajet(trajet = df_velo, numero = c(880, 881))
 
 #Sur GitHub (dans repo, Compare & pull request, Create pull request, Merge pull request)
 #Sur RStudio (onglet Git, master, Pull)
+
+
+# Q12 ----
+
+usethis::use_testthat()
+
+usethis::use_test("test-velo.R")
+#Ça va créer un fichier dans : tests/testthat/test-velo.R
+
+
+# Q13 ----
+
+devtools::test()
+#pour tester les fonctions via le fichier créé
+
+
+#couverture de test
+covr::package_coverage() #validé car > 80%
+covr::report()
+
+
+# Q14 ----
+
+#ajouter un test pour le fonction filtrer_trajet() dans le fichier test-velo.R
+#erreur donc on modifie la fonction filtrer_trajet() dans le fichier velo.R
+
+devtools::test() #tester les tests
+devtools::document() #remettre la doc à jour
+
+
+# Q15 ----
+
+usethis::use_vignette("utilisation-velo") #création d'un fichier dans vignettes/utilisation-velo.Rmd
+#modifier la vignette
+
+devtools::build_vignettes() #générer la vignette
+#ou devtools::check()
+
+#vérifier dans doc/utilisation-velo.html
+
+
 
