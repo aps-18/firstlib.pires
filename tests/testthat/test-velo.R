@@ -192,3 +192,10 @@ test_that("calcul_distribution_semaine filtre modifie le résultat", {
 
   expect_true(res_filtre$total_trajets != res_sans_filtre$total_trajets)
 })
+
+test_that("get_data fonctionne", {
+  res <- get_data(880, 1)
+
+  expect_s3_class(res, "data.frame")
+  expect_true(ncol(res) > 0)
+})

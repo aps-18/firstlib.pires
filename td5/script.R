@@ -308,12 +308,14 @@ devtools::check()
 # Q23 ----
 
 #couverture de test
-covr::package_coverage()
-covr::report() #toujours 100%
+covr::package_coverage() #toujours 100%
+covr::report()
 
 
 
 #TD6 (ajout d'une nouvelle fonction)
-#mettre la nouvelle focntion dans velo.R
+#mettre la nouvelle fonction dans velo.R
 devtools::document()
 devtools::install()
+#ajout d'un test
+covr::package_coverage()

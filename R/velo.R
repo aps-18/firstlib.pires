@@ -165,22 +165,25 @@ filtrer_trajet <- function(trajet, numero) {
 }
 
 
+#' Récupérer les données vélos depuis l'API Nantes
+#'
+#' @param boucle Numéro de boucle.
+#' @param mois Mois à filtrer.
+#'
+#' @return Un data.frame filtré.
+#' @export
 get_data <- function(boucle, mois) {
-
   url <- paste0(
     "https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_comptages-velo-nantes-metropole",
     "&rows=10000"
   )
 
   data <- jsonlite::fromJSON(url)$records$fields
-
   df <- as.data.frame(data)
 
   df$date <- as.Date(df$date)
-
   df <- df[df$numero_boucle == boucle, ]
-
   df <- df[format(df$date, "%m") == sprintf("%02d", mois), ]
 
-  return(df)
+  df
 }
