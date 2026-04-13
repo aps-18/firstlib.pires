@@ -1,0 +1,91 @@
+---
+title: "Utilisation des fonctions du package firstlib.pires"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Utilisation des fonctions du package firstlib.pires}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+**Introduction**
+
+Cette vignette présente un exemple simple d’utilisation du package firstlib.pires
+pour analyser les données de trajets vélos à Nantes.
+
+Nous allons :
+
+- filtrer les données sur une ou plusieurs boucles ;
+- représenter la distribution hebdomadaire des trajets.
+
+
+**Chargement du package**
+
+```{r}
+library(firstlib.pires)
+```
+
+
+**Aperçu du jeu de données**
+
+Le package contient le jeu de données df_velo.
+```{r}
+head(df_velo)
+```
+
+
+**Filtrer les trajets sur certaines boucles**
+
+La fonction filtrer_trajet() permet de sélectionner uniquement les lignes
+correspondant à certains numéros de boucle.
+
+```{r}
+df_filtre <- filtrer_trajet(df_velo, c(880, 881))
+head(df_filtre)
+```
+
+*On peut aussi ne pas filtrer les données en utilisant NULL.*
+
+```{r}
+df_non_filtre <- filtrer_trajet(df_velo, NULL)
+head(df_non_filtre)
+```
+
+
+**Calculer la distribution hebdomadaire**
+
+La fonction calcul_distribution_semaine() permet d’additionner le nombre de
+trajets par jour de la semaine.
+
+```{r}
+distribution <- calcul_distribution_semaine(df_filtre)
+distribution
+```
+
+
+**Représenter graphiquement la distribution hebdomadaire**
+
+La fonction plot_distribution_semaine() produit un graphique en barres du
+nombre de trajets par jour de la semaine.
+
+```{r}
+plot_distribution_semaine(df_filtre)
+```
+
+
+**Conclusion**
+
+Le package permet de manipuler simplement les données de trajets vélos,
+notamment pour :
+
+- filtrer les boucles souhaitées ;
+- calculer des indicateurs simples ;
+- produire rapidement un graphique.
+
+

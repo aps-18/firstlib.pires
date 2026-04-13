@@ -209,4 +209,15 @@ devtools::build_vignettes() #générer la vignette
 #vérifier dans doc/utilisation-velo.html
 
 
+# Q16 ----
+
+usethis::use_pkgdown()
+pkgdown::build_site() #construire le site
+
+#vérifier dans le dossier docs
+
+#dans les références on voit toutes nos fonctions
+#dans articles, il y a nos vignettes
+
+
 
