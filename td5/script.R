@@ -315,7 +315,7 @@ covr::report()
 
 #TD6 (ajout d'une nouvelle fonction)
 #mettre la nouvelle fonction dans velo.R
-devtools::document()
-devtools::install()
 #ajout d'un test
 covr::package_coverage()
+devtools::document()
+devtools::install()
